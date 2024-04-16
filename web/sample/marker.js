@@ -1,6 +1,6 @@
 console.log('maker')
 import { map } from './index.js';
-export { create_place };
+export { create_place_by_coord, create_place_by_latlng };
 
 const iconBase =
     "https://developers.google.com/maps/documentation/javascript/examples/full/images/";
@@ -20,9 +20,10 @@ const icons = {
   };
 
 
-async function create_place(x, y, type) {
-	console.log('create_place')
+function create_place_by_coord(x, y, type) {
+	console.log('create_place_by_coord')
 	let position = new google.maps.LatLng(x,y)
+    console.log(position)
 	return new google.maps.Marker({
       position: position,
       icon: icons[type].icon,
@@ -31,6 +32,14 @@ async function create_place(x, y, type) {
 }
 
 
+function create_place_by_latlng(latlng, type) {
+	console.log('create_place_by_latlng')
+	return new google.maps.Marker({
+      position: latlng,
+      icon: icons[type].icon,
+      map: map,
+    });
+}
 
 
 

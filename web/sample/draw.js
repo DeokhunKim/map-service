@@ -1,8 +1,8 @@
 import {map} from "./index.js";
-export { create_popup_select, hide_popup_select };
+export { create_popup_select, hide_popup_select, get_select_popup_position };
 
 let popup;
-let popup_div = document.getElementById("content");
+let popup_div = document.getElementById("popup-select");
 
 class Popup extends google.maps.OverlayView {
     position;
@@ -31,7 +31,6 @@ class Popup extends google.maps.OverlayView {
     /** Called when the popup is removed from the map. */
     onRemove() {
       if (this.containerDiv.parentElement) {
-          popup_div = document.getElementById("content");
           this.containerDiv.parentElement.removeChild(this.containerDiv);
       }
     }
@@ -55,6 +54,9 @@ class Popup extends google.maps.OverlayView {
         this.containerDiv.style.display = display;
       }
     }
+    get_position(){
+        return this.position;
+    }
   }
 
 
@@ -73,5 +75,9 @@ async function create_popup_select(x, y, map) {
 async function hide_popup_select() {
 	console.log('hide_popup_select')
 	popup.onRemove();
+}
+
+function get_select_popup_position() {
+	return popup.get_position();
 }
 
