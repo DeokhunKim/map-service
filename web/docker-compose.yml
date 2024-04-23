@@ -15,3 +15,19 @@ services:
       - ./sample:/usr/share/nginx/html #임시
       - ./config/nginx:/etc/nginx/conf.d
 
+  map-service-web-npm:
+    user: root
+    image: node:lts-alpine3.19
+    restart: always
+    container_name: ${MAP_SERVICE_WEB_NODE_NAME}
+    hostname: ${MAP_SERVICE_WEB_NODE_NAME}
+    env_file:
+      - .env
+    ports:
+      - ${MAP_SERVICE_WEB_NODE_PORT}:8080
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./react:/app
+    # /bin/sh
+

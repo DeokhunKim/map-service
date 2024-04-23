@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  map-service-socket-api:
+    user: root
+    image: ${MAP_SERVICE_SOCKET_API_NAME}
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    restart: always
+    container_name: ${MAP_SERVICE_SOCKET_API_NAME}
+    hostname: ${MAP_SERVICE_SOCKET_API_NAME}
+    env_file:
+      - .env
+    tty: true
+    stdin_open: true
+    ports:
+      - ${MAP_SERVICE_SOCKET_API_PORT}:8080
+    volumes:
+      - ./src:/app/m
+      - ./config/gunicorn:/app/conf
+
