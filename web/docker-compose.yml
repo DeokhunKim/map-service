@@ -30,4 +30,5 @@ services:
     volumes:
       - ./react:/app
     # /bin/sh
+    # CHOKIDAR_USEPOLLING=true npm start
 
