@@ -1,10 +1,13 @@
 import {useEffect, useState} from "react";
 import {createRoot} from "react-dom/client";
 import {init_event} from "./event.js";
+import {init_marker} from "./marker.js";
 
 function GoogleMap(){
 
   const [googleMap, setGoogleMap] = useState<google.maps.Map>();
+  console.log(google.maps);
+  console.log(google.maps.OverlayView);
 
   useEffect(() => {
 
@@ -38,6 +41,9 @@ function GoogleMap(){
       },
     } );
 
+    init_event(instance);
+    init_marker(instance)
+
     setGoogleMap(instance);
 
 
@@ -59,9 +65,10 @@ function GoogleMap(){
       title: '마커',
       content: markerContainer,
     });
-    createRoot(markerContainer).render(<div style={{backgroundColor:'yellow', padding:'10px'}}>마커</div>);
+    createRoot(markerContainer).render(<div style={{backgroundColor:'yellow', padding:'10px'}}>마커@@!!</div>);
     markerInstance.addListener('click', () => {
       alert('마커 클릭')
+
     });
 
     return () => {
@@ -69,7 +76,6 @@ function GoogleMap(){
     }
   }, [googleMap])
 
-  init_event();
 
   return <></>
 }
