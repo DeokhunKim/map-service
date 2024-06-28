@@ -54,6 +54,39 @@ function GoogleMap(){
 
     setGoogleMap(instance);
 
+    // 마커 생성
+    const location = { lat: 37.51, lng: 127.01 };
+    const marker = new google.maps.Marker({
+      position: location,
+      map: instance,
+      animation: google.maps.Animation.DROP,
+    });
+
+    // ping 효과 추가
+    const circle = new google.maps.Circle({
+      map: instance,
+      center: location,
+      radius: 50,
+      strokeColor: '#FF0000',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      //fillColor: '#FF0000',
+      fillOpacity: 0.35,
+    });
+
+    // 애니메이션 효과 적용
+    let growing = true;
+    const interval = setInterval(() => {
+      const radius = circle.getRadius();
+      if (growing) {
+        circle.setRadius(radius + 10);
+        if (radius >= 300) growing = false;
+      } else {
+        circle.setRadius(radius - 10);
+        if (radius <= 50) growing = true;
+      }
+    }, 100);
+
 
     return () => {
       document.body.removeChild(mapContainer);

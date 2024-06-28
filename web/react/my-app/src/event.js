@@ -33,6 +33,15 @@ function init_event(map){
 		status = 'popup_select'
 	});
 
+	map.addListener("bounds_changed", () => {
+		const bounds = map.getBounds();
+		if (!bounds.contains(location)) {
+		  const pingBorder = new PingOverlay(location, map);
+		  pingBorder.setMap(map);
+		}
+	  });
+	  
+
 }
 
 function select_add_place()  {
@@ -44,3 +53,6 @@ function select_add_place()  {
 }
 
 export { init_event };
+
+
+

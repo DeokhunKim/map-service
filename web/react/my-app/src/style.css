@@ -169,3 +169,24 @@ body {
   font-weight: bold;
 }
 
+
+/* 핑 관련 */
+.ping-border {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: ping-animation 1s infinite;
+}
+@keyframes ping-animation {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
