@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {createRoot} from "react-dom/client";
 import {init_event} from "./event.js";
 import {init_marker} from "./marker.js";
+import { createPopupClass } from "./draw.js";
 
 function GoogleMap(){
 
@@ -40,6 +41,13 @@ function GoogleMap(){
         strictBounds: true,
       },
     } );
+
+    const handleMapLoad = () => {
+      const Popup = createPopupClass();
+      if (Popup) {
+        console.log('popup?')
+      }
+    };
 
     init_event(instance);
     init_marker(instance)

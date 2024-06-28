@@ -1,6 +1,8 @@
-import GoogleMap from './GoogleMap.tsx'
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { create_place_by_coord, create_place_by_latlng } from './marker.js';
 import { create_popup_select, hide_popup_select, get_select_popup_position } from "./draw.js";
+import PopupContainer from './popup_container';
 
 console.log('event.js');
 
@@ -26,6 +28,7 @@ function init_event(map){
 	
 	map.addListener("rightclick", (e) => {
 		let position = e.latLng.toJSON();
+		console.log('poisition: ' + position.lat + ',' + position.lng)
 		create_popup_select(position.lat, position.lng, map)
 		status = 'popup_select'
 	});
@@ -41,13 +44,11 @@ window.onload = function () {
         <span id="popup-select-ping">Send Location</span>
     </div> */}
 
-	const popup_container = document.createElement('div');
-
-	popup_container.id = 'popup-select';
-	popup_container.class = 'popup-select';
-	popup_container.onclick = select_add_place;
-
-	document.body.appendChild(popup_container)
+	// const container = document.createElement('div');
+	// container.id = 'popup-select';
+	// //container.style.display = 'none'
+	// document.body.appendChild(container);
+	// ReactDOM.render(<PopupContainer />, container);
 }
 
 function select_add_place()  {

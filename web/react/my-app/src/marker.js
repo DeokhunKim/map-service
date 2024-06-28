@@ -32,9 +32,9 @@ const icons = {
 
 function create_place_by_coord(x, y, type) {
 	console.log('create_place_by_coord')
-	let position = new google.maps.LatLng(x,y)
+	let position = new window.google.maps.LatLng(x,y)
     console.log(position)
-	return new google.maps.Marker({
+	return new window.google.maps.Marker({
       position: position,
       icon: icons[type].icon,
       map: map,
@@ -44,7 +44,7 @@ function create_place_by_coord(x, y, type) {
 
 function create_place_by_latlng(latlng, type) {
 	console.log('create_place_by_latlng')
-	return new google.maps.Marker({
+	return new window.google.maps.Marker({
       position: latlng,
       icon: icons[type].icon,
       map: map,
