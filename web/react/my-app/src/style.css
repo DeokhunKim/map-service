@@ -92,6 +92,7 @@ body {
 }
 
 
+
 /* The popup bubble styling. */
 .popup-bubble {
   /* Position the bubble centred-above its parent. */
@@ -148,3 +149,23 @@ body {
   position: absolute;
   top: 50%;
 }
+
+.popup-select {
+  display: flex;
+  flex-direction: column; /* 세로 방향으로 정렬 */
+  /*align-items: center;    /* 수평 가운데 정렬 */
+  justify-content: center; /* 수직 가운데 정렬 */
+
+  cursor: pointer;             /* 버튼 커서 */
+  user-select: none;           /* 드래그 방지 */
+  -webkit-user-select: none;   /* 드래그 방지 (웹킷 브라우저) */
+  -moz-user-select: none;      /* 드래그 방지 (파이어폭스) */
+  -ms-user-select: none;       /* 드래그 방지 (인터넷 익스플로러/엣지) */
+}
+
+.popup-select > div {
+  display: flex;
+  align-items: center;    /* 각 div 내의 수직 가운데 정렬 */
+  font-weight: bold;
+}
+

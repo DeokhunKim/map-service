@@ -14,9 +14,9 @@ function init_event(map){
 	// 클릭 이벤트
 	map.addListener("click", (e) => {
 		if(status === 'stand_by') {
-			console.log('status is stand_by');
-			let position = e.latLng.toJSON();
-			create_place_by_coord(position.lat, position.lng, "basic")
+			// console.log('status is stand_by');
+			// let position = e.latLng.toJSON();
+			// create_place_by_coord(position.lat, position.lng, "basic")
 		}
 		else if(status === 'popup_select') {
 			console.log('status is popup_select');
@@ -33,22 +33,6 @@ function init_event(map){
 		status = 'popup_select'
 	});
 
-}
-
-window.onload = function () {
-{/* <div id="popup-select" class="popup-select">
-        <span class="material-symbols-outlined">location_on</span>
-        <span id="popup-select-add_place">Add Place</span>
-        <p></p>
-        <span class="material-symbols-outlined">transcribe</span>
-        <span id="popup-select-ping">Send Location</span>
-    </div> */}
-
-	// const container = document.createElement('div');
-	// container.id = 'popup-select';
-	// //container.style.display = 'none'
-	// document.body.appendChild(container);
-	// ReactDOM.render(<PopupContainer />, container);
 }
 
 function select_add_place()  {

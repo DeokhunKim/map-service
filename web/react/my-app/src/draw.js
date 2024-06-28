@@ -86,7 +86,7 @@ async function create_popup_select(x, y, map) {
 
 
     container.id = 'popup-select';
-    ReactDOM.render(<PopupContainer />, container);
+    ReactDOM.render(<PopupContainer lat={x} lng={y} hide_func={hide_popup_select}/>, container);
     document.body.appendChild(container);
 
 
