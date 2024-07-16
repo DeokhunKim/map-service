@@ -17,6 +17,6 @@ services:
     ports:
       - ${MAP_SERVICE_SOCKET_API_PORT}:8080
     volumes:
-      - ./src:/app/m
+      - ./src:/app/src
       - ./config/gunicorn:/app/conf
 

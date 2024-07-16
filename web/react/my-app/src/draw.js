@@ -4,7 +4,6 @@ import PopupContainer from './popup_container';
 export { create_popup_select, hide_popup_select, get_select_popup_position };
 
 let popup;
-let popup_div = document.getElementById("popup-select");
 
 
 export const createPopupClass = () => {
@@ -105,4 +104,12 @@ async function hide_popup_select() {
 function get_select_popup_position() {
 	return popup.get_position();
 }
+
+
+/* 
+
+
+
+*/
+
 

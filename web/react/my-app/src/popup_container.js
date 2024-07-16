@@ -1,5 +1,6 @@
 import React from 'react';
 import { create_place_by_coord, create_place_by_latlng } from './marker.js';
+import { create_ping } from "./ping.js";
 
 const PopupContainer = ({ lat, lng, hide_func }) => {
    // 이벤트 핸들러 함수 정의
@@ -11,6 +12,8 @@ const PopupContainer = ({ lat, lng, hide_func }) => {
 
   const handleSendLocationClick = () => {
     console.log('Send Location clicked');
+    create_ping(lat, lng)
+    hide_func();
   };
 
   return (

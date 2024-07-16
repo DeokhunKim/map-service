@@ -3,12 +3,11 @@ import {createRoot} from "react-dom/client";
 import {init_event} from "./event.js";
 import {init_marker} from "./marker.js";
 import { createPopupClass } from "./draw.js";
+import { init_ping } from "./ping.js";
 
 function GoogleMap(){
 
   const [googleMap, setGoogleMap] = useState<google.maps.Map>();
-  console.log(google.maps);
-  console.log(google.maps.OverlayView);
 
   useEffect(() => {
 
@@ -42,50 +41,21 @@ function GoogleMap(){
       },
     } );
 
+    const PingOverlay = null;
     const handleMapLoad = () => {
       const Popup = createPopupClass();
       if (Popup) {
-        console.log('popup?')
+        console.log('Popup')
       }
     };
 
-    init_event(instance);
+    init_event(instance, PingOverlay);
     init_marker(instance)
+    init_ping(instance)
 
     setGoogleMap(instance);
 
-    // 마커 생성
-    const location = { lat: 37.51, lng: 127.01 };
-    const marker = new google.maps.Marker({
-      position: location,
-      map: instance,
-      animation: google.maps.Animation.DROP,
-    });
 
-    // ping 효과 추가
-    const circle = new google.maps.Circle({
-      map: instance,
-      center: location,
-      radius: 50,
-      strokeColor: '#FF0000',
-      strokeOpacity: 0.8,
-      strokeWeight: 2,
-      //fillColor: '#FF0000',
-      fillOpacity: 0.35,
-    });
-
-    // 애니메이션 효과 적용
-    let growing = true;
-    const interval = setInterval(() => {
-      const radius = circle.getRadius();
-      if (growing) {
-        circle.setRadius(radius + 10);
-        if (radius >= 300) growing = false;
-      } else {
-        circle.setRadius(radius - 10);
-        if (radius <= 50) growing = true;
-      }
-    }, 100);
 
 
     return () => {

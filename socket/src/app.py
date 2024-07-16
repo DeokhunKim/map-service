@@ -1,22 +1,38 @@
-import eventlet
 import socketio
+import uvicorn
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
-sio = socketio.Server()
-app = socketio.WSGIApp(sio, static_files={
-    '/': {'content_type': 'text/html', 'filename': 'index.html'}
-})
+
+sio = socketio.AsyncServer(cors_allowed_origins='*', async_mode='asgi')
+app = FastAPI()
+app.add_middleware(
+      CORSMiddleware,
+      allow_origins=["*"], # Allows all origins
+      allow_credentials=True,
+      allow_methods=["*"], # Allows all methods
+      allow_headers=["*"], # Allows all headers
+)
+
+
+map_service_socket_app = socketio.ASGIApp(sio, app)
+
+# Handle connection events
+@sio.event
+async def connect(sid, environ):
+    print(f'Client connected: {sid}')
+    await sio.emit('message', 'Welcome!', to=sid)
 
 @sio.event
-def connect(sid, environ):
-    print('connect ', sid)
+async def disconnect(sid):
+    print(f'Client disconnected: {sid}')
 
-@sio.event
-def my_message(sid, data):
-    print('message ', data)
-
-@sio.event
-def disconnect(sid):
-    print('disconnect ', sid)
+# Handle custom events
+@sio.on('test')
+async def sendMessage(sid, data):
+    print(f'Message from {sid}: {data}')
+    #await sio.send(f'Echo: {data}', to=sid)
 
 if __name__ == '__main__':
-    eventlet.wsgi.server(eventlet.listen(('', 5000)), app)
+    print('start main')
+    uvicorn.run(map_service_socket_app, host='0.0.0.0', port=8080)

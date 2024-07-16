@@ -186,7 +186,7 @@ body {
     opacity: 0.5;
   }
   100% {
-    transform: scale(2);
+    transform: scale(50);
     opacity: 0;
   }
 }

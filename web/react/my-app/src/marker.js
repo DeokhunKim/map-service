@@ -38,6 +38,7 @@ function create_place_by_coord(x, y, type) {
       position: position,
       icon: icons[type].icon,
       map: map,
+      animation: window.google.maps.Animation.DROP
     });
 }
 
@@ -48,6 +49,7 @@ function create_place_by_latlng(latlng, type) {
       position: latlng,
       icon: icons[type].icon,
       map: map,
+      animation: window.google.maps.Animation.DROP
     });
 }
 

@@ -2,13 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { create_place_by_coord, create_place_by_latlng } from './marker.js';
 import { create_popup_select, hide_popup_select, get_select_popup_position } from "./draw.js";
+import { create_ping } from "./ping.js";
 import PopupContainer from './popup_container';
 
 console.log('event.js');
 
 let status = 'stand_by'
 
-function init_event(map){
+function init_event(map, PingOverlay){
 	console.log('init_event');
 
 	// 클릭 이벤트
@@ -33,13 +34,7 @@ function init_event(map){
 		status = 'popup_select'
 	});
 
-	map.addListener("bounds_changed", () => {
-		const bounds = map.getBounds();
-		if (!bounds.contains(location)) {
-		  const pingBorder = new PingOverlay(location, map);
-		  pingBorder.setMap(map);
-		}
-	  });
+
 	  
 
 }
