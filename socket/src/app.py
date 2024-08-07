@@ -26,12 +26,44 @@ async def connect(sid, environ):
 @sio.event
 async def disconnect(sid):
     print(f'Client disconnected: {sid}')
+    
+    
+# Handle join room
+@sio.on('join_room')
+async def join_room(sid, data):
+    room = data['room']
+    sio.enter_room(sid, room)
+    await sio.emit('message', f'{sid} has entered the room {room}', room=room)
+    print(f'{sid} joined room {room}')
+
+# Handle leave room
+@sio.on('leave_room')
+async def leave_room(sid, data):
+    room = data['room']
+    sio.leave_room(sid, room)
+    await sio.emit('message', f'{sid} has left the room {room}', room=room)
+    print(f'{sid} left room {room}')
+
+
+# Handle sending a message to a room
+@sio.on('send_room_message')
+async def send_room_message(sid, data):
+    room = data['room']
+    message = data['message']
+    await sio.emit('message', message, room=room)
+    print(f'Message to room {room} from {sid}: {message}')
+    
 
 # Handle custom events
 @sio.on('test')
 async def sendMessage(sid, data):
     print(f'Message from {sid}: {data}')
-    #await sio.send(f'Echo: {data}', to=sid)
+
+@sio.on('postman')
+async def sendPostmanMessage(sid, data):
+    print(f'sendPostmanMessage from {sid}: {data}')
+    await sio.emit('message', 'gogo', room='room1')
+    
 
 if __name__ == '__main__':
     print('start main')
