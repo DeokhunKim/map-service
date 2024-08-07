@@ -27,11 +27,12 @@ socket.on('disconnect', () => {
 
 function sendTestEvent(event, room, message) {
     console.log(`Sending test event: ${message}`);
-    socket.emit(event, message);
     socket.emit(event, { room: room, message: 'Hello, Room!' });
 }
 
+function sendEvent(event, room, message) {
+    console.log(`Sending event: ${event}, room: ${room}, message: ${message}`);
+    socket.emit(event, { room: room, message: message });
+}
 
-
-
-// export { init_event };
+export { sendEvent };
