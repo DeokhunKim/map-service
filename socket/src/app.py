@@ -37,7 +37,8 @@ async def disconnect(sid):
 @sio.on('join_room')
 async def join_room(sid, data):
     room = data['room']
-    sio.enter_room(sid, room)
+    await sio.enter_room(sid, room)
+    await sio.emit('join_success', f'{sid}')
     await sio.emit('message', f'{sid} has entered the room {room}', room=room)
     logger.info(f'{sid} joined room {room}')
 
@@ -73,8 +74,14 @@ async def sendPostmanMessage(sid, data):
 
 # 핑 Ping
 @sio.on('ping')
-async def sendMessage(sid, data):
-    print(f'Message from {sid}: {data}')
+async def received_ping(sid, data):
+    logger.info(f'Ping message sid: {sid} data: {data}')
+    msg = {
+        'sid': sid,
+        'message': data['message'],
+    }
+    await sio.emit('message', msg, room=data['room'])
+
     
 
 if __name__ == '__main__':

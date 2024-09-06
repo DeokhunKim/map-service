@@ -1,6 +1,7 @@
 import io from "socket.io-client";
 
 const room_name = 'room1';
+let my_sid = ''
 
 const socket = io('http://localhost:5050', {
     path: '/socket.io/'
@@ -14,6 +15,12 @@ socket.on('connect', () => {
 
 socket.on('message', (msg) => {
     console.log('Message from server: ', msg);
+    
+});
+
+socket.on('join_success', (msg) => {
+    console.log('join_success: ', msg);
+    my_sid = msg;
 });
 
 socket.on('response', (msg) => {

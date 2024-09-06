@@ -66,24 +66,24 @@ function GoogleMap(){
 
   useEffect(() => {
 
-    const markerContainer = document.createElement('div');
-    const markerInstance = new google.maps.marker.AdvancedMarkerElement({
-      position: {
-        lat: 37.5,
-        lng: 127.0,
-      },
-      map: googleMap,
-      title: '마커',
-      content: markerContainer,
-    });
-    createRoot(markerContainer).render(<div style={{backgroundColor:'yellow', padding:'10px'}}>마커@@!!</div>);
-    markerInstance.addListener('click', () => {
-      alert('마커 클릭')
+    // const markerContainer = document.createElement('div');
+    // const markerInstance = new google.maps.marker.AdvancedMarkerElement({
+    //   position: {
+    //     lat: 37.5,
+    //     lng: 127.0,
+    //   },
+    //   map: googleMap,
+    //   title: '마커',
+    //   content: markerContainer,
+    // });
+    // createRoot(markerContainer).render(<div style={{backgroundColor:'yellow', padding:'10px'}}>마커@@!!</div>);
+    // markerInstance.addListener('click', () => {
+    //   alert('마커 클릭')
 
-    });
+    // });
 
     return () => {
-      markerInstance.map = null;
+      // markerInstance.map = null;
     }
   }, [googleMap])
 
