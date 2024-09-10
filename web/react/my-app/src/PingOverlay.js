@@ -7,11 +7,12 @@ export const createPingOverlayClass = () => {
     }
   
     class PingOverlay extends window.google.maps.OverlayView {
-      constructor(position, map) {
+      constructor(position, map, style_color) {
         super();
         this.position = position;
         this.div = null;
         this.map = map;
+        this.style_color = style_color;
         //this.setMap(map);
       }
     
@@ -21,6 +22,7 @@ export const createPingOverlayClass = () => {
         this.div = div;
         const panes = this.getPanes();
         panes.overlayLayer.appendChild(div);
+        this.setStyle(this.style_color)
       }
     
       draw() {

@@ -38,7 +38,7 @@ async def disconnect(sid):
 async def join_room(sid, data):
     room = data['room']
     await sio.enter_room(sid, room)
-    await sio.emit('join_success', f'{sid}')
+    await sio.emit('join_success', f'{sid}', to=sid)
     await sio.emit('message', f'{sid} has entered the room {room}', room=room)
     logger.info(f'{sid} joined room {room}')
 
@@ -80,7 +80,7 @@ async def received_ping(sid, data):
         'sid': sid,
         'message': data['message'],
     }
-    await sio.emit('message', msg, room=data['room'])
+    await sio.emit('ping', msg, room=data['room'])
 
     
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { create_place_by_coord, create_place_by_latlng } from './marker.js';
 import { create_ping } from "./ping.js";
 import { sendEvent } from "./websocket.js"
+import { getMyColor, getMySid } from "./shared.js"
 
 const room = 'room1';
 
@@ -15,7 +16,7 @@ const PopupContainer = ({ lat, lng, hide_func }) => {
 
   const handleSendLocationClick = () => {
     console.log('Send Location clicked');
-    create_ping(lat, lng);
+    create_ping(lat, lng, getMyColor(getMySid()));
     const message = `{lat:${lat},lng:${lng}}`;
     sendEvent('ping', room, message)
     hide_func();

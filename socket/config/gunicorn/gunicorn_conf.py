@@ -1,6 +1,6 @@
 bind = "0.0.0.0:8080"
 
-workers = 64
+workers = 1
 worker_class = "uvicorn.workers.UvicornWorker"
 
 BASE_DIR = "/app/api"

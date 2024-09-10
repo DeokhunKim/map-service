@@ -178,7 +178,9 @@ body {
   background-color: red;
   border-radius: 50%;
   opacity: 0.5;
-  animation: ping-animation 1s infinite;
+  animation: ping-animation 3s;
+  animation-iteration-count: 2;
+  animation-fill-mode: forwards;
 }
 @keyframes ping-animation {
   0% {
